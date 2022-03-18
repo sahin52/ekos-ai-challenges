@@ -1,10 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import './card.css'
+import {CreditCardInput} from './CreditCardInput'
 function App() {
   return (
     <div className="App">
+      <CreditCardInput />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

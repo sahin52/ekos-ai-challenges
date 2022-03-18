@@ -1,0 +1,13 @@
+div#wrapper {
+    width: 50%;
+    position: relative;
+    width: 352px;
+    margin: auto;
+        height: 222px;
+  }
+  
+  .creditcard {
+    position: absolute;
+    top: 0;  
+    left: 0;
+  }
