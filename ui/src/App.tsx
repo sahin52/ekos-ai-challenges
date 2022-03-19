@@ -1,8 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import './card.css'
-import {CreditCardInput} from './CreditCardInput'
+import {CreditCardInput} from './modules/CreditCard/CreditCardInput'
 function App() {
   return (
     <div className="App">

@@ -1,8 +1,7 @@
 import { useState } from "react";
-import "./App.css";
 import "./card.css";
-import { p } from "./util/console-log";
-import { splice } from "./util/string";
+import { p } from "../../util/console-log";
+import { splice } from "../../util/string";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +19,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
   );
   const [pending, setPending] = useState(false);
 
-  const [face, setFace] = useState<"front" | "back">("back");
+  const [face, setFace] = useState<"front" | "back">("front");
   const turnBack = () => {
     if (face === "back") {
       setFace("front");
@@ -119,7 +118,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
         <div className="col-md-12 d-flex justify-content-center">
           <button className="btn btn-primary" onClick={turnBack}>
             {" "}
-            Arka Yüzü Çevir{" "}
+           Turn Around{" "}
           </button>
         </div>
       </div>
