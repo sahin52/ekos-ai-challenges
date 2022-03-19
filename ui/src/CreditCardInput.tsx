@@ -4,6 +4,10 @@ import "./card.css";
 import { p } from "./util/console-log";
 import { splice } from "./util/string";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
+const spinner = <FontAwesomeIcon className="button-pending" icon={faSpinner} />;
 interface ICreditCardInputProps {}
 export function CreditCardInput(props: ICreditCardInputProps) {
   const [frontFaceText, setFrontFaceText] = useState("");
@@ -14,6 +18,8 @@ export function CreditCardInput(props: ICreditCardInputProps) {
   const [frontFaceShownText, setFrontFaceShownText] = useState(
     "●●●● ●●●● ●●●● ●●●●"
   );
+  const [pending, setPending] = useState(false);
+
   const [face, setFace] = useState<"front" | "back">("back");
   const turnBack = () => {
     if (face === "back") {
@@ -208,7 +214,10 @@ export function CreditCardInput(props: ICreditCardInputProps) {
       </div>
       <div className="row">
         <div className="col-md-12 d-flex justify-content-center">
-          <button className="btn btn-success"> Submit </button>
+          <button disabled={pending} className="btn btn-success" onClick={() => setPending(true)}>
+            {pending && spinner}
+            Submit
+          </button>
         </div>
       </div>
     </>

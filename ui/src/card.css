@@ -20,3 +20,18 @@ input::-webkit-inner-spin-button {
   font-family: CreditCardFont;
   src: url(../public/CreditCardFont.ttf);
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .button-pending {
+    animation: button-pending-spin infinite 2s linear;
+  }
+}
+
+@keyframes button-pending-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
