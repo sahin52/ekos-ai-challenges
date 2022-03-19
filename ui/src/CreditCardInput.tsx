@@ -7,12 +7,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 interface ICreditCardInputProps {}
 export function CreditCardInput(props: ICreditCardInputProps) {
   const [frontFaceText, setFrontFaceText] = useState("");
-  const [cvc, setCvc] = useState("●●●");
-  const [date, setDate] = useState(""); //("●●/●●");
+  const [ccv, setCcv] = useState("");
+  const [shownCcv, setShownCcv] = useState("●●●")
+  const [date, setDate] = useState("");
+  const [shownDate, setShownDate] = useState("●●/●●●●");
   const [frontFaceShownText, setFrontFaceShownText] = useState(
     "●●●● ●●●● ●●●● ●●●●"
   );
-  const [face, setFace] = useState<"front" | "back">("front");
+  const [face, setFace] = useState<"front" | "back">("back");
   const turnBack = () => {
     if (face === "back") {
       setFace("front");
@@ -83,7 +85,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
                   fontSize: "20px",
                 }}
               >
-                {cvc}
+                {shownCcv}
               </p>
               <p
                 style={{
@@ -94,7 +96,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
                   fontSize: "20px",
                 }}
               >
-                {date}
+                {shownDate}
               </p>
             </div>
           )}
@@ -125,6 +127,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             name="cardinput"
             value={frontFaceText}
             onChange={(event) => {
+                const val = event.target.value;
               console.log(event.target.value);
               if (event.target.value.length > 16) {
                 event.preventDefault();
@@ -132,6 +135,9 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               }
               setFrontFaceShownText(replaceWithAposthrophs(event.target.value));
               setFrontFaceText(event.target.value);
+              if(val.length===0){
+                setFrontFaceShownText("●●●● ●●●● ●●●● ●●●●")
+              }
             }}
           ></input>
         </div>
@@ -146,19 +152,25 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               width: "100%",
               //   width: "250px",
             }}
-            placeholder="CVC"
+            placeholder="CCV"
             onSelect={() => {
               setFace("back");
             }}
-            name="cvc"
-            value={cvc}
+            name="ccv"
+            value={ccv}
             onChange={(event) => {
+                const val = event.target.value;
               console.log(event.target.value);
               if (event.target.value.length > 3) {
                 event.preventDefault();
                 return;
               }
-              setCvc(event.target.value);
+              setCcv(event.target.value);
+              setShownCcv(val);
+              if(val.length===0){
+                  setShownCcv("●●●")
+              }
+
             }}
           ></input>
           <input
@@ -176,36 +188,13 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             name="date"
             value={date}
             onChange={(event) => {
-              console.log(event.target.value);
               const val = event.target.value;
               p(val)
               setDate(getDateFormatted(val));
-              return;
-              if (event.target.value.length > 7) {
-                event.preventDefault();
-                return;
+              setShownDate(getDateFormatted(val));
+              if(val.length===0){
+                  setShownDate('●●/●●●●')
               }
-              if (!/^[0-9]*\/{0,1}[0-9]*$/.test(event.target.value)) {
-                p("bozzuk");
-                // event.preventDefault();
-                return;
-              }
-              if (val.length < 3) {
-                p("burada");
-                if (!/^[0-9]{0,2}$/.test(val)) {
-                  p("meh");
-                  return;
-                } else if (val.length === 2) {
-                  p("buraya zaten giremez");
-                  setDate(val + "/");
-                } else {
-                  setDate(val);
-                }
-              } else {
-              }
-
-              //   setDate(getDateFormatted(event.target.value))
-              //setDate(event.target.value);
             }}
           ></input>
         </div>
