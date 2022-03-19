@@ -16,3 +16,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+@font-face {
+  font-family: CreditCardFont;
+  src: url(../public/CreditCardFont.ttf);
+}

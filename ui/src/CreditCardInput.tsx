@@ -8,7 +8,7 @@ interface ICreditCardInputProps {}
 export function CreditCardInput(props: ICreditCardInputProps) {
   const [frontFaceText, setFrontFaceText] = useState("");
   const [ccv, setCcv] = useState("");
-  const [shownCcv, setShownCcv] = useState("●●●")
+  const [shownCcv, setShownCcv] = useState("●●●");
   const [date, setDate] = useState("");
   const [shownDate, setShownDate] = useState("●●/●●●●");
   const [frontFaceShownText, setFrontFaceShownText] = useState(
@@ -60,7 +60,10 @@ export function CreditCardInput(props: ICreditCardInputProps) {
                   top: "152px",
                   left: "36px",
                   width: "250px",
-                  fontSize: "20px",
+                  fontSize: "15px",
+                  justifyContent: "start",
+                  textAlign: "left",
+                  fontFamily: "CreditCardFont",
                 }}
               >
                 {frontFaceShownText}
@@ -79,10 +82,12 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               <p
                 style={{
                   position: "absolute",
-                  top: "82px",
-                  left: "136px",
+                  top: "92px",
+                  left: "216px",
                   width: "250px",
                   fontSize: "20px",
+                  textAlign: "left",
+                  fontFamily: "CreditCardFont",
                 }}
               >
                 {shownCcv}
@@ -90,10 +95,12 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               <p
                 style={{
                   position: "absolute",
-                  top: "152px",
-                  left: "156px",
+                  top: "162px",
+                  left: "196px",
                   width: "250px",
                   fontSize: "20px",
+                  textAlign: "left",
+                  fontFamily: "CreditCardFont",
                 }}
               >
                 {shownDate}
@@ -121,13 +128,14 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             style={{
               margin: "auto",
               width: "100%",
+
               //   width: "250px",
             }}
             placeholder="Credit Card Number"
             name="cardinput"
             value={frontFaceText}
             onChange={(event) => {
-                const val = event.target.value;
+              const val = event.target.value;
               console.log(event.target.value);
               if (event.target.value.length > 16) {
                 event.preventDefault();
@@ -135,8 +143,8 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               }
               setFrontFaceShownText(replaceWithAposthrophs(event.target.value));
               setFrontFaceText(event.target.value);
-              if(val.length===0){
-                setFrontFaceShownText("●●●● ●●●● ●●●● ●●●●")
+              if (val.length === 0) {
+                setFrontFaceShownText("●●●● ●●●● ●●●● ●●●●");
               }
             }}
           ></input>
@@ -159,7 +167,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             name="ccv"
             value={ccv}
             onChange={(event) => {
-                const val = event.target.value;
+              const val = event.target.value;
               console.log(event.target.value);
               if (event.target.value.length > 3) {
                 event.preventDefault();
@@ -167,10 +175,9 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               }
               setCcv(event.target.value);
               setShownCcv(val);
-              if(val.length===0){
-                  setShownCcv("●●●")
+              if (val.length === 0) {
+                setShownCcv("●●●");
               }
-
             }}
           ></input>
           <input
@@ -189,11 +196,11 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             value={date}
             onChange={(event) => {
               const val = event.target.value;
-              p(val)
+              p(val);
               setDate(getDateFormatted(val));
               setShownDate(getDateFormatted(val));
-              if(val.length===0){
-                  setShownDate('●●/●●●●')
+              if (val.length === 0) {
+                setShownDate("●●/●●●●");
               }
             }}
           ></input>
@@ -213,6 +220,8 @@ function replaceWithAposthrophs(value: string): string {
   for (let i = 4; i < len && i < 12; i++) {
     splitted[i] = "*";
   }
+  for (let i = Math.floor(splitted.length / 4); i > 0; i--)
+    splitted.splice(4 * i, 0, " ");
   return splitted.join("");
 }
 
@@ -223,4 +232,3 @@ function getDateFormatted(value: string) {
   }
   return value;
 }
-
