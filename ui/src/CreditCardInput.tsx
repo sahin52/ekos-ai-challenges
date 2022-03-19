@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import "./card.css";
+import { p } from "./util/console-log";
+import { splice } from "./util/string";
 
 interface ICreditCardInputProps {}
 export function CreditCardInput(props: ICreditCardInputProps) {
@@ -36,22 +38,50 @@ export function CreditCardInput(props: ICreditCardInputProps) {
           )}
           <img className="creditcard" src="front.png" />
 
-          <input
-            type="number"
+          <p
+          style={({position: "absolute",top: "152px",
+          left: "36px",
+          width: "250px",})}
+          >{frontFaceShownText}</p>
+        </div>
+        <input
+            type='number'
+            maxLength={16}
             style={{
+                margin:'auto',
               position: "absolute",
               top: "152px",
               left: "36px",
               width: "250px",
             }}
-            value={frontFaceShownText}
+            placeholder='Credit Card Number'
+            name="cardinput"
+            value={frontFaceText}
             onChange={(event) => {
-              console.log(event.target.value);
-              console.log(event.target.selectionStart);
+                console.log(event.target.value);
+                if(event.target.value.length>16){
+                    event.preventDefault();
+                    return;
+                }
+                setFrontFaceShownText(replaceWithAposthrophs(event.target.value))
+                setFrontFaceText(event.target.value);
+                
+                
+                
+                
             }}
+
           ></input>
-        </div>
       </div>
     </div>
   );
 }
+function replaceWithAposthrophs(value: string): string {
+    let len = value.length;
+    let splitted = value.split('')
+    for(let i=4;i<len && i<12;i++){
+        splitted[i]='*'
+    }
+    return splitted.join('');
+}
+
