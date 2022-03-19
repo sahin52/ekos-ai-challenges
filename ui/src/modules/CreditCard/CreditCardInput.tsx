@@ -5,6 +5,9 @@ import { splice } from "../../util/string";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { isValidCard } from "./api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const spinner = <FontAwesomeIcon className="button-pending" icon={faSpinner} />;
 interface ICreditCardInputProps {}
@@ -13,10 +16,19 @@ export function CreditCardInput(props: ICreditCardInputProps) {
   const [ccv, setCcv] = useState("");
   const [shownCcv, setShownCcv] = useState("●●●");
   const [date, setDate] = useState("");
-  const [shownDate, setShownDate] = useState("●●/●●●●");
+  const [shownDate, setShownDate] = useState("●●/●●");
   const [frontFaceShownText, setFrontFaceShownText] = useState(
     "●●●● ●●●● ●●●● ●●●●"
   );
+  const notify = (isValid: boolean) => {
+    if(isValid){
+      toast("A Valid Card!", { style: { backgroundColor: "green", color: "white" } });
+
+    }
+      else{
+toast("Invalid Card, Please Check!",{ style: { backgroundColor: "red", color: "white" } } );
+      }
+  };
   const [pending, setPending] = useState(false);
 
   const [face, setFace] = useState<"front" | "back">("front");
@@ -118,7 +130,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
         <div className="col-md-12 d-flex justify-content-center">
           <button className="btn btn-primary" onClick={turnBack}>
             {" "}
-           Turn Around{" "}
+            Turn Around{" "}
           </button>
         </div>
       </div>
@@ -205,7 +217,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               setDate(getDateFormatted(val));
               setShownDate(getDateFormatted(val));
               if (val.length === 0) {
-                setShownDate("●●/●●●●");
+                setShownDate("●●/●●");
               }
             }}
           ></input>
@@ -213,12 +225,27 @@ export function CreditCardInput(props: ICreditCardInputProps) {
       </div>
       <div className="row">
         <div className="col-md-12 d-flex justify-content-center">
-          <button disabled={pending} className="btn btn-success" onClick={() => setPending(true)}>
+          <button
+            disabled={pending}
+            className="btn btn-success"
+            onClick={async () => {
+              setPending(true);
+              let isValid = await isValidCard({
+                ccv: ccv,
+                exp: date,
+                number: frontFaceText,
+              });
+              notify(isValid);
+
+              setPending(false);
+            }}
+          >
             {pending && spinner}
             Submit
           </button>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
@@ -236,7 +263,7 @@ function replaceWithAposthrophs(value: string): string {
 function getDateFormatted(value: string) {
   value = value.replace(/\D+/g, "");
   if (value.length >= 3) {
-    return `${value.slice(0, 2)}/${value.slice(2, 6)}`;
+    return `${value.slice(0, 2)}/${value.slice(2, 4)}`;
   }
   return value;
 }
