@@ -9,49 +9,63 @@ export function CreditCardInput(props: ICreditCardInputProps) {
   const [frontFaceText, setFrontFaceText] = useState("");
   const [cvc, setCvc] = useState("");
   const [date, setDate] = useState("");
-  const [frontFaceShownText, setFrontFaceShownText] = useState("423");
+  const [frontFaceShownText, setFrontFaceShownText] = useState("");
+  const [face, setFace] = useState<"front" | "back">("front");
   return (
     <>
       <div className="row">
         <div className="col-md-12 d-flex justify-content-center">
-          <div id="wrapper">
-            {frontFaceShownText[0] === "4" && (
-              <img
-                src="visa.png"
-                style={{
-                  top: "0px",
-                  left: "20px",
-                  height: "100px",
-                  position: "absolute",
-                  zIndex: "1",
-                }}
-              />
-            )}
-            {frontFaceShownText[0] === "5" && (
-              <img
-                src="mastercard.png"
-                style={{
-                  top: "10px",
-                  left: "10px",
-                  height: "100px",
-                  position: "absolute",
-                  zIndex: "1",
-                }}
-              />
-            )}
-            <img className="creditcard" src="front.png" />
+          {face === "front" ? (
+            <div id="wrapper">
+              {frontFaceShownText[0] === "4" && (
+                <img
+                  src="visa.png"
+                  style={{
+                    top: "0px",
+                    left: "20px",
+                    height: "100px",
+                    position: "absolute",
+                    zIndex: "1",
+                  }}
+                />
+              )}
+              {frontFaceShownText[0] === "5" && (
+                <img
+                  src="mastercard.png"
+                  style={{
+                    top: "10px",
+                    left: "10px",
+                    height: "100px",
+                    position: "absolute",
+                    zIndex: "1",
+                  }}
+                />
+              )}
+              <img className="creditcard" src="front.png" />
 
-            <p
+              <p
+                style={{
+                  position: "absolute",
+                  top: "152px",
+                  left: "36px",
+                  width: "250px",
+                }}
+              >
+                {frontFaceShownText}
+              </p>
+            </div>
+          ) : (
+            <div
               style={{
-                position: "absolute",
-                top: "152px",
-                left: "36px",
-                width: "250px",
+                position: "relative",
+                width: "352px",
+                margin: "auto",
+                height: "222px",
               }}
             >
-              {frontFaceShownText}
-            </p>
-          </div>
+              <img className="creditcard" src="back.png" />
+            </div>
+          )}
         </div>
       </div>
       <div className="row">
@@ -63,6 +77,9 @@ export function CreditCardInput(props: ICreditCardInputProps) {
         <div className="col-md-6 d-flex justify-content-center">
           <input
             type="number"
+            onSelect={() => {
+              setFace("front");
+            }}
             maxLength={16}
             style={{
               margin: "auto",
@@ -95,6 +112,9 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               //   width: "250px",
             }}
             placeholder="CVC"
+            onSelect={() => {
+              setFace("back");
+            }}
             name="cvc"
             value={cvc}
             onChange={(event) => {
@@ -113,6 +133,9 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               margin: "auto",
               width: "100%",
               //   width: "250px",
+            }}
+            onSelect={() => {
+              setFace("back");
             }}
             placeholder="Date"
             name="date"
