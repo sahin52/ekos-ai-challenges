@@ -7,10 +7,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 interface ICreditCardInputProps {}
 export function CreditCardInput(props: ICreditCardInputProps) {
   const [frontFaceText, setFrontFaceText] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [date, setDate] = useState("");
-  const [frontFaceShownText, setFrontFaceShownText] = useState("");
+  const [cvc, setCvc] = useState("●●●");
+  const [date, setDate] = useState(""); //("●●/●●");
+  const [frontFaceShownText, setFrontFaceShownText] = useState(
+    "●●●● ●●●● ●●●● ●●●●"
+  );
   const [face, setFace] = useState<"front" | "back">("front");
+  const turnBack = () => {
+    if (face === "back") {
+      setFace("front");
+    } else {
+      setFace("back");
+    }
+  };
   return (
     <>
       <div className="row">
@@ -49,6 +58,7 @@ export function CreditCardInput(props: ICreditCardInputProps) {
                   top: "152px",
                   left: "36px",
                   width: "250px",
+                  fontSize: "20px",
                 }}
               >
                 {frontFaceShownText}
@@ -64,13 +74,38 @@ export function CreditCardInput(props: ICreditCardInputProps) {
               }}
             >
               <img className="creditcard" src="back.png" />
+              <p
+                style={{
+                  position: "absolute",
+                  top: "82px",
+                  left: "136px",
+                  width: "250px",
+                  fontSize: "20px",
+                }}
+              >
+                {cvc}
+              </p>
+              <p
+                style={{
+                  position: "absolute",
+                  top: "152px",
+                  left: "156px",
+                  width: "250px",
+                  fontSize: "20px",
+                }}
+              >
+                {date}
+              </p>
             </div>
           )}
         </div>
       </div>
       <div className="row">
         <div className="col-md-12 d-flex justify-content-center">
-          <button className="btn btn-primary"> Arka Yüzü Çevir </button>
+          <button className="btn btn-primary" onClick={turnBack}>
+            {" "}
+            Arka Yüzü Çevir{" "}
+          </button>
         </div>
       </div>
       <div className="row d-flex justify-content-center">
@@ -127,8 +162,8 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             }}
           ></input>
           <input
-            type="number"
-            maxLength={3}
+            type="text"
+            maxLength={7}
             style={{
               margin: "auto",
               width: "100%",
@@ -142,11 +177,35 @@ export function CreditCardInput(props: ICreditCardInputProps) {
             value={date}
             onChange={(event) => {
               console.log(event.target.value);
-              if (event.target.value.length > 5) {
+              const val = event.target.value;
+              p(val)
+              setDate(getDateFormatted(val));
+              return;
+              if (event.target.value.length > 7) {
                 event.preventDefault();
                 return;
               }
-              setDate(event.target.value);
+              if (!/^[0-9]*\/{0,1}[0-9]*$/.test(event.target.value)) {
+                p("bozzuk");
+                // event.preventDefault();
+                return;
+              }
+              if (val.length < 3) {
+                p("burada");
+                if (!/^[0-9]{0,2}$/.test(val)) {
+                  p("meh");
+                  return;
+                } else if (val.length === 2) {
+                  p("buraya zaten giremez");
+                  setDate(val + "/");
+                } else {
+                  setDate(val);
+                }
+              } else {
+              }
+
+              //   setDate(getDateFormatted(event.target.value))
+              //setDate(event.target.value);
             }}
           ></input>
         </div>
@@ -167,3 +226,12 @@ function replaceWithAposthrophs(value: string): string {
   }
   return splitted.join("");
 }
+
+function getDateFormatted(value: string) {
+  value = value.replace(/\D+/g, "");
+  if (value.length >= 3) {
+    return `${value.slice(0, 2)}/${value.slice(2, 6)}`;
+  }
+  return value;
+}
+
