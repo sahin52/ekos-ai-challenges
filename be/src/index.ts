@@ -5,8 +5,9 @@ moduleAlias.addAlias('@', __dirname);
 
 import { createApp } from './app';
 import { startServer } from './server';
-
+import {connect} from "./config/database"
 if (process.env.NODE_ENV !== 'test') {
+  connect();
   const app = createApp();
   startServer(app);
 }

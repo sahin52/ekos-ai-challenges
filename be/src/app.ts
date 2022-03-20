@@ -1,10 +1,14 @@
-import * as errorHandler from '@/middlewares/errorHandler';
+import * as errorHandler from '@/middleware/errorHandler';
 
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import routes from '@/routes';
+// importing user context
+
+
+// Register
 
 export const createApp = (): express.Application => {
   const app = express();
