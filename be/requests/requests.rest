@@ -49,8 +49,8 @@ content-type: application/json
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
 
 {
-    "name": "Deneme",
-    "category": "Fiction",
+    "name": "1984",
+    "category": "Science-Fiction",
     "sellCount":123,
     "price_cent": 1095
 
@@ -84,4 +84,10 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I
     "_id":"6238ccc0e79d5a30b87231d1"
 
 }
+
+### 
+GET http://localhost:8080/recommend/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
 
