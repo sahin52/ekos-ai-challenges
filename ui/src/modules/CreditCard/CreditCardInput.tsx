@@ -135,7 +135,7 @@ toast("Invalid Card, Please Check!",{ style: { backgroundColor: "red", color: "w
         </div>
       </div>
       <div className="row d-flex justify-content-center">
-        <div className="col-md-6 d-flex justify-content-center">
+        <div className="col-sm-12 col-md-3 d-flex justify-content-center">
           <input
             type="number"
             onSelect={() => {
@@ -168,7 +168,7 @@ toast("Invalid Card, Please Check!",{ style: { backgroundColor: "red", color: "w
         </div>
       </div>
       <div className="row d-flex justify-content-center">
-        <div className="col-md-6 d-flex justify-content-center">
+        <div className="col-sm-6 col-md-3 d-flex justify-content-center">
           <input
             type="number"
             maxLength={3}
