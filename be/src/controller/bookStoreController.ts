@@ -1,31 +1,24 @@
 import * as bookStoreService from '@/service/bookStore/bookStoreService';
 
 import { Request, Response } from 'express';
-import * as homeController from '@/controller/home';
-
-import { Router } from 'express';
-import User from '@/model/user';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import auth from '@/middleware/auth';
-
-export const getAll = (req: Request, res: Response) => {
-  const result = bookStoreService.getAll(req);
+export const getAll = async (req: Request, res: Response) => {
+  console.log((req as any).user);
+  const result = await bookStoreService.getAll(req);
 
   res.json(result);
 };
-export const create = (req: Request, res: Response) => {
-  const result = bookStoreService.create(req);
+export const create = async (req: Request, res: Response) => {
+  const result = await bookStoreService.create(req);
 
   res.json(result);
 };
-export const update = (req: Request, res: Response) => {
-  const result = bookStoreService.update(req);
+export const update = async (req: Request, res: Response) => {
+  const result = await bookStoreService.update(req);
 
   res.json(result);
 };
-export const Delete = (req: Request, res: Response) => {
-  const result = bookStoreService.Delete(req);
+export const Delete = async (req: Request, res: Response) => {
+  const result = await bookStoreService.Delete(req);
 
   res.json(result);
 };

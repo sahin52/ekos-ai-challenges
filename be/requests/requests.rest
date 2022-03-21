@@ -1,0 +1,87 @@
+GET http://localhost:8080/
+
+###
+POST http://localhost:8080/register/  HTTP/1.1
+content-type: application/json
+
+{
+    "first_name":"Sahin",
+    "last_name":"Kasap", 
+    "email":"sk@gmail", 
+    "password":"mypw"
+}
+
+###
+
+POST http://localhost:8080/login/  HTTP/1.1
+content-type: application/json
+
+{
+    "email":"sk@gmail", 
+    "password":"mypw"
+}
+
+
+### 
+POST http://localhost:8080/test/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
+{
+    "email":"sk@gmail", 
+    "password":"mypw"
+}
+
+
+### 
+GET http://localhost:8080/books/get-all/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
+{
+    "email":"sk@gmail", 
+    "password":"mypw"
+}
+
+### 
+POST http://localhost:8080/books/create/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
+{
+    "name": "Deneme",
+    "category": "Fiction",
+    "sellCount":123,
+    "price_cent": 1095
+
+}
+
+### 
+GET http://localhost:8080/books/get-all/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
+### 
+POST http://localhost:8080/books/update/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
+{
+    "name": "Deneme2",
+    "category": "Fiction2",
+    "sellCount":1231,
+    "price_cent": 1096,
+    "_id":"6238ccfb6bf1b17a8ea0c253"
+
+}
+
+### 
+POST http://localhost:8080/books/delete/  HTTP/1.1
+content-type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjIzOGMyN2I3NjY1MTdlOGJmMThiYmM5IiwiZW1haWwiOiJza0BnbWFpbCIsImlhdCI6MTY0Nzg4Njk3MSwiZXhwIjoxNjQ3ODk0MTcxfQ.Riext1hUgg_mqo4T-BiWBS12LJ9iK4MxiluDEw4gSes
+
+{
+    "_id":"6238ccc0e79d5a30b87231d1"
+
+}
+

@@ -1,10 +1,8 @@
 import * as homeController from '@/controller/home';
+import * as bookStoreController from '@/controller/bookStoreController';
 
 import { Router } from 'express';
-import User from '@/model/user';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import auth from '@/middleware/auth';
+import { verifyToken } from '@/middleware/auth';
 
 const router = Router();
 
@@ -13,5 +11,10 @@ router.post('/register', homeController.register);
 
 // Login
 router.post('/login', homeController.login);
-router.post('/test', auth, homeController.test);
+router.post('/test', verifyToken, homeController.test);
+
+router.get ('/books/get-all', bookStoreController.getAll);
+router.post('/books/create', verifyToken, bookStoreController.create);
+router.post('/books/update', verifyToken, bookStoreController.update);
+router.post('/books/delete', verifyToken, bookStoreController.Delete);
 export default router;
